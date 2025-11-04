@@ -38,9 +38,9 @@ function App() {
       <StatsSection />
       <MerchantSection />
       <FooterCTA openModal={openModal} />
-      
-      <Modal 
-        isOpen={activeModal === 'customer'} 
+
+      <Modal
+        isOpen={activeModal === 'customer'}
         onClose={closeModal}
         type="customer"
         icon="🛍️"
@@ -48,8 +48,8 @@ function App() {
         message="We're crafting an amazing shopping experience just for you. Get ready to discover the best local fashion at your fingertips."
         tagline="✨ You're Just One Gate Away From Style ✨"
       />
-      <Modal 
-        isOpen={activeModal === 'merchant'} 
+      <Modal
+        isOpen={activeModal === 'merchant'}
         onClose={closeModal}
         type="merchant"
         icon="🚀"
@@ -57,8 +57,18 @@ function App() {
         message="We're building powerful tools to help your business thrive. Get ready to reach thousands of customers who love shopping local."
         tagline="✨ You're Just One Gate Away From Growth ✨"
       />
-      <Modal 
-        isOpen={activeModal === 'general'} 
+        {/* <div style={{ marginTop: '1rem' }}>
+          <iframe 
+          aria-label='Request a call back' 
+          frameborder="0" 
+          style="height:500px;width:99%;border:none;" 
+          src='https://forms.zohopublic.in/vangetiakhilone1/form/SustainabilityFashionMerchantOnboardingForm/formperma/lfDnLNMcaYbOcc1gSX1uiRTmSQIrwfDLt6cEX64RgI4'
+          >
+          </iframe>
+        </div> */}
+      {/* </Modal> */}
+      <Modal
+        isOpen={activeModal === 'general'}
         onClose={closeModal}
         type="general"
         icon="🌟"
@@ -275,6 +285,40 @@ function ImpactCard({ icon, title, description }) {
 function Modal({ isOpen, onClose, type, icon, title, message, tagline }) {
   if (!isOpen) return null
 
+  // Zoho Form URL - Replace with your actual Zoho form URL
+  const ZOHO_FORM_URL = 'https://forms.zohopublic.in/vangetiakhilone1/form/SustainabilityFashionMerchantOnboardingForm/formperma/lfDnLNMcaYbOcc1gSX1uiRTmSQIrwfDLt6cEX64RgI4' // Replace this with your Zoho form URL
+
+  // Show Zoho form for merchant modal
+  if (type === 'merchant') {
+    return (
+      <div className="modal" style={{ display: 'block' }}>
+        <div className="modal-content modal-form-zoho">
+          <span className="close" onClick={onClose}>&times;</span>
+          <div className="modal-icon">{icon}</div>
+          <h2>Join OneGate as a Merchant</h2>
+          <p className="form-subtitle">Fill in your details and we'll get back to you soon</p>
+          
+          {/* Zoho Form Iframe */}
+          <div className="zoho-form-container">
+            <iframe 
+              src={ZOHO_FORM_URL}
+              width="100%"
+              height="600px"
+              frameBorder="0"
+              title="Merchant Registration Form"
+              style={{ border: 'none', borderRadius: '15px' }}
+            />
+          </div>
+
+          <div className="gate-tagline" style={{ marginTop: '1rem' }}>
+            ✨ You're Just One Gate Away From Growth ✨
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Default modal for customer and general
   return (
     <div className="modal" style={{ display: 'block' }}>
       <div className="modal-content">
